@@ -1,0 +1,30 @@
+{
+  "name": "github-api",
+  "version": "1.0.0",
+  "description": "accessing data from github api",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jest": "^27.4.5",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.1.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server/server_start.js",
+    "start": "node server/server_start.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/notwillcasey/github-api.git"
+  },
+  "author": "Will Casey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/notwillcasey/github-api/issues"
+  },
+  "homepage": "https://github.com/notwillcasey/github-api#readme"
+}

@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const controllers = require('../controllers/pull-controllers.js');
+const pullControllers = require('../controllers/pull-controllers.js');
 
-router.get('/pr/commits', controllers.getCommits);
+router.get('/pr/commits', pullControllers.getCommits);
 
 module.exports = router;

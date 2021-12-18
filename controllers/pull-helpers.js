@@ -10,15 +10,7 @@ module.exports = {
         'Authorization': `token ${process.env.TOKEN}`
       }
     }
-
     return axios.get(url, options)
-    .then((res) => {
-      return res.data;
-    })
-    .catch((err) => {
-      console.log(`ERROR getting open pull requests for user { ${user} } and repo { ${repo} }`);
-      return null;
-    })
   },
 
   getCommitsForOpenPullRequests: (user, repo, openRequests) => {
@@ -26,8 +18,6 @@ module.exports = {
 
     for (let pull of openRequests) {
       let pullData = {
-        user: user,
-        repo: repo,
         pull_number: pull.number,
         pull_title: pull.title
       }

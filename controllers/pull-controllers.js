@@ -1,31 +1,26 @@
-const helpers = require('./helpers.js');
+const helpers = require('./pull-helpers.js');
+const url = require('url');
 
 module.exports = {
 
-  getCommits: (req, res) => {
-    const reqParams = req.query.url.slice(19).split('/');
-    const user = reqParams[0];
-    const repo = reqParams[1];
+  getCommits: async (req, res) => {
+    const path = url.parse(req.query.url).path.split('/');
+    const user = path[1];
+    const repo = path[2];
+    let commitData;
+    let requestData;
 
-    return helpers.getOpenPullRequests(user, repo)
-      .then((requestData) => {
-        if (requestData == null) {
-          return 'not matching user and repo'
-        } else {
-          return helpers.getCommitsForOpenPullRequests(user, repo, requestData)
-        }
-      })
-      .then((commitData) => {
-        if (commitData === 'not matching user and repo') {
-          res.status(400).send('error finding user and repo combination - check that the repo exists for the entered user');
-        } else {
-          res.status(200).send(commitData);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(400).send('error - try again later');
-      });
+    try {
+      requestData = await helpers.getOpenPullRequests(user, repo);
+      commitData = await helpers.getCommitsForOpenPullRequests(user, repo, requestData.data);
+      res.status(200).send(commitData);
+    } catch(e) {
+      let message = 'error completing request - try again later'
+      if (e.response.statusText.includes('Not Found')) {
+        message = 'error finding user and repo combination - check that the repo exists for the entered user';
+      }
+      res.status(400).send(message);
+    }
   }
 
 };

@@ -3,6 +3,10 @@ const axios = require('axios');
 module.exports = {
 
   getOpenPullRequests: (user, repo) => {
+    /*
+      expects USER (string) and REPO (string)
+      requests open pull requests from github api for inputted USER and REPO
+    */
     if (!user || !repo) { return Promise.reject() };
 
     const url = `https://api.github.com/repos/${user}/${repo}/pulls?status=open`;
@@ -16,6 +20,10 @@ module.exports = {
   },
 
   getCommitsForOpenPullRequests: (user, repo, openRequests) => {
+    /*
+      expects USER (string), REPO (string), and openRequests (array of objects containing pull request data)
+      creates promises, requesting commit data from github API for each pull request in openRequests
+    */
     const commitHistoryRequests = [];
 
     for (let pull of openRequests) {

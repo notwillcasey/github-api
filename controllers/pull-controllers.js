@@ -5,7 +5,10 @@ module.exports = {
 
   getCommits: async (req, res) => {
     let path, user, repo, badInput;
-
+    /*
+      req.query.url is expected to be in the following format:
+        https://github.com/USER/REPO
+    */
     if (typeof req.query.url === 'string') {
       path = url.parse(req.query.url).path.split('/');
       user = path[1];

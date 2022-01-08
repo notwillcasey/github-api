@@ -24,9 +24,8 @@ module.exports = {
       expects USER (string), REPO (string), and openRequests (array of objects containing pull request data)
       creates promises, requesting commit data from github API for each pull request in openRequests
     */
-    const commitHistoryRequests = [];
 
-    for (let pull of openRequests) {
+    const requests = openRequests.map((pull) => {
       let pullData = {
         pull_number: pull.number,
         pull_title: pull.title
@@ -50,10 +49,11 @@ module.exports = {
           })
       })
 
-      commitHistoryRequests.push(commitHistoryPromise);
-    }
+      return commitHistoryPromise;
 
-    return Promise.all(commitHistoryRequests);
+    })
+
+    return Promise.allSettled(requests);
   }
 
 };

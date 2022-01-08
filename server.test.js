@@ -3,7 +3,7 @@ const supertest = require('supertest');
 const request = supertest(app);
 
 
-describe('/pr/commits endpoint', () => {
+describe('/pr/commits endpoint integration tests', () => {
   it('should return array of objects for provided user and repo', async () => {
     let response = await request.get('/pr/commits?url=https://github.com/notwillcasey/notwillcasey');
 

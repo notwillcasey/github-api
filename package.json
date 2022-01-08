@@ -14,7 +14,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "jest --coverage",
+    "test-pr": "jest --coverage",
+    "test-pr-watch": "jest --watch --coverage",
     "dev": "nodemon server/server_start.js",
     "start": "node server/server_start.js"
   },

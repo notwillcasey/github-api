@@ -4,6 +4,8 @@ const url = require('url');
 module.exports = {
 
   getCommits: async (req, res) => {
+
+    console.log(req.query)
     let path, user, repo, badInput;
     /*
       req.query.url is expected to be in the following format:

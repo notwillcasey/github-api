@@ -9,10 +9,9 @@ module.exports = {
       req.query.url is expected to be in the following format:
         https://github.com/USER/REPO
     */
-    if (typeof req.query.url === 'string') {
-      path = url.parse(req.query.url).path.split('/');
-      user = path[1];
-      repo = path[2];
+    if (typeof req.query.user === 'string' && typeof req.query.repo === 'string') {
+      user = req.query.user;
+      repo = req.query.repo;
       !user || !repo ? badInput = true : badInput = false;
     } else {
       user = null;
@@ -36,6 +35,8 @@ module.exports = {
       }
       res.status(code).send(message);
     }
-  }
+  },
+
+
 
 };
